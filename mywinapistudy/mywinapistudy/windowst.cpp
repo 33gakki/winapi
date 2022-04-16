@@ -90,10 +90,7 @@ LRESULT window::HandleMsg(HWND hwnd, UINT msg, WPARAM wparem, LPARAM lparam) noe
 		
 		PostQuitMessage(0);
 		return 0;
-	case WM_KEYDOWN:
-		kbd.OnKeyPressed(static_cast<unsigned char> (wparem));
-		MessageBox(nullptr, "WM_KEYDOWN", "OnKeyPressed", MB_OK | MB_ICONEXCLAMATION);
-		break;
+
 	case WM_KEYUP:
 		kbd.OnKeyReleased(static_cast<unsigned char> (wparem));
 		MessageBox(nullptr, "WM_KEYUP", "OnKeyReleased", MB_OK | MB_ICONEXCLAMATION);
