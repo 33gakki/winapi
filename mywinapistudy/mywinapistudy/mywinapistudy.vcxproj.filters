@@ -30,6 +30,9 @@
     <ClInclude Include="resource2.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="Mouse.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ChiliExceptrion.cpp">
@@ -48,6 +51,9 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="windowst.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Mouse.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

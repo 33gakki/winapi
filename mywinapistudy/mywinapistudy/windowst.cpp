@@ -82,6 +82,9 @@ LRESULT CALLBACK window::HandleMsgThunk(HWND hwnd, UINT msg, WPARAM wparem, LPAR
 	return pWnd->HandleMsg(hwnd, msg, wparem, lparam);
 }
 //不能通过winapi函数调用成员函数，因此创建了静态函数，数据是winapi端的userdata中取得的
+struct point {
+	int x, y;
+}pt;
 LRESULT window::HandleMsg(HWND hwnd, UINT msg, WPARAM wparem, LPARAM lparam) noexcept
 {
 	switch (msg)
@@ -90,8 +93,12 @@ LRESULT window::HandleMsg(HWND hwnd, UINT msg, WPARAM wparem, LPARAM lparam) noe
 		
 		PostQuitMessage(0);
 		return 0;
-
+	case WM_KEYDOWN:
+		kbd.OnKeyPressed(static_cast<unsigned char> (wparem));
+		MessageBox(nullptr, "WM_KEYDOWN", "OnKeyPressed", MB_OK | MB_ICONEXCLAMATION);
+		break;
 	case WM_KEYUP:
+
 		kbd.OnKeyReleased(static_cast<unsigned char> (wparem));
 		MessageBox(nullptr, "WM_KEYUP", "OnKeyReleased", MB_OK | MB_ICONEXCLAMATION);
 		break;
@@ -99,6 +106,36 @@ LRESULT window::HandleMsg(HWND hwnd, UINT msg, WPARAM wparem, LPARAM lparam) noe
 		kbd.OnChar(static_cast<unsigned char> (wparem));
 		MessageBox(nullptr, "WM_KEYUP", "OnChar", MB_OK | MB_ICONEXCLAMATION);
 		break;
+	case WM_LBUTTONDOWN:
+	{
+		int x = LOWORD(lparam);
+		int y = HIWORD(lparam);
+		char a[10], b[10];
+		wsprintf(a, "%d", x);
+		wsprintf(b, "%d", y);
+		MessageBox(nullptr, a, b, MB_OK | MB_ICONEXCLAMATION);
+		break;
+	}
+	case WM_MOUSEMOVE:
+	{
+		POINTS pt = MAKEPOINTS(lparam);
+		mou.OnMouseMove(pt.x, pt.y);
+		break;
+	}
+	case WM_MOUSEWHEEL:
+	{
+		const POINTS pt = MAKEPOINTS(lparam);
+		if (GET_WHEEL_DELTA_WPARAM(wparem) > 0)
+		{
+			mou.OnWheelUp(pt.x, pt.y);
+			MessageBox(nullptr, "WM_MOUSEWHEEL", "OnWheelUp", MB_OK | MB_ICONEXCLAMATION);
+		}
+		if (GET_WHEEL_DELTA_WPARAM(wparem) < 0)
+		{
+			mou.OnWheelDown(pt.x, pt.y);
+		}
+		break;
+	}
 	}
 	
 

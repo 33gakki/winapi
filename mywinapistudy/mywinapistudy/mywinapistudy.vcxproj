@@ -145,6 +145,7 @@
   <ItemGroup>
     <ClInclude Include="ChiliExceptrion.h" />
     <ClInclude Include="keyboard.h" />
+    <ClInclude Include="Mouse.h" />
     <ClInclude Include="resource2.h" />
     <ClInclude Include="WindowsMessageMap.h" />
     <ClInclude Include="windowst.h" />
@@ -154,6 +155,7 @@
     <ClCompile Include="decodetest.cpp" />
     <ClCompile Include="directx_test.cpp" />
     <ClCompile Include="keyboard.cpp" />
+    <ClCompile Include="Mouse.cpp" />
     <ClCompile Include="WindowsMessageMap.cpp" />
     <ClCompile Include="windowst.cpp" />
   </ItemGroup>

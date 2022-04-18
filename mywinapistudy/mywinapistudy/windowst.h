@@ -4,6 +4,7 @@
 #include <windows.h>
 #include "ChiliExceptrion.h"
 #include "keyboard.h"
+#include "Mouse.h"
 
 #define CHWND_EXCEPT( hr ) window::HrException( __LINE__,__FILE__,(hr) )
 #define CHWND_LAST_EXCEPT() window::HrException( __LINE__,__FILE__,GetLastError() )
@@ -66,11 +67,13 @@ private:
 	static LRESULT WINAPI HandleMsgSetup(HWND hWnd,UINT msg,WPARAM wParam,LPARAM lParam) noexcept;
 	static LRESULT CALLBACK HandleMsgThunk(HWND hWnd,UINT msg,WPARAM wParam,LPARAM lParam) noexcept;
 	LRESULT HandleMsg(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) noexcept;
+public:
+	keyboard kbd;
+	Mouse mou;
 private:
 	int height;
 	int width;
 	
 	HWND hwnd;	
-	keyboard kbd;
 };
 
